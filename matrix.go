@@ -1,7 +1,7 @@
 package lapjv
 
 // ToSquare squarify a matrix
-func ToSquare(m [][]int) [][]int {
+func ToSquare[T Number](m [][]T) [][]T {
 	rowsLen := len(m)
 	if rowsLen == 0 {
 		return m
@@ -19,10 +19,10 @@ func ToSquare(m [][]int) [][]int {
 		size = colsLen
 	}
 
-	matrix := make([][]int, size)
+	matrix := make([][]T, size)
 
 	for i := 0; i < size; i++ {
-		matrix[i] = make([]int, size)
+		matrix[i] = make([]T, size)
 		for j := 0; j < size; j++ {
 			if i < rowsLen && j < colsLen {
 				matrix[i][j] = m[i][j]

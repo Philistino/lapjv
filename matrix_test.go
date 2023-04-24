@@ -64,3 +64,10 @@ func newMatrixFloat(x, y int) [][]float64 {
 
 	return rows
 }
+
+func TestEmptyMatrix(t *testing.T) {
+	matrix := make([][]int, 0)
+	result := lapjv.ToSquare(matrix)
+
+	assert.Equal(t, matrix, result)
+}

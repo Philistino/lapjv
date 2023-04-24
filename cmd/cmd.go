@@ -96,7 +96,7 @@ func runSolver(cmd *cobra.Command, args []string) error {
 		if err := e.Decode(&matrix); err != nil {
 			return err
 		}
-	} else if interactive == true {
+	} else if interactive {
 		var err error
 		m, err := NewInteractiveMatrixGenerator()
 		if err != nil {
@@ -122,7 +122,7 @@ func runSolver(cmd *cobra.Command, args []string) error {
 	}
 
 	s := lapjv.Lapjv(matrix)
-	fmt.Printf("Matrix resolution : \n\tCost : \t\t%d\n\tRow solution : \t%v\n\tCol solution : \t%v\n", s.Cost, s.InRow, s.InCol)
+	fmt.Printf("Matrix resolution : \n\tCost : \t\t%f\n\tRow solution : \t%v\n\tCol solution : \t%v\n", s.Cost, s.InRow, s.InCol)
 
 	return nil
 }
