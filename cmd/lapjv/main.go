@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/heetch/lapjv/cmd"
+	"github.com/philistino/lapjv/cmd"
 )
 
 func main() {

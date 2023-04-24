@@ -3,7 +3,7 @@ package lapjv_test
 import (
 	"testing"
 
-	"github.com/heetch/lapjv"
+	"github.com/philistino/lapjv"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -50,6 +50,16 @@ func newMatrix(x, y int) [][]int {
 
 	for i := range rows {
 		rows[i] = make([]int, y)
+	}
+
+	return rows
+}
+
+func newMatrixFloat(x, y int) [][]float64 {
+	rows := make([][]float64, x)
+
+	for i := range rows {
+		rows[i] = make([]float64, y)
 	}
 
 	return rows

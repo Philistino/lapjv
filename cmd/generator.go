@@ -6,7 +6,7 @@ import (
 	"io"
 	"math/rand"
 
-	"github.com/heetch/lapjv"
+	"github.com/philistino/lapjv"
 )
 
 // MatrixGenerator will store info we will use to generate our matrix and store it.

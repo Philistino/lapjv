@@ -31,7 +31,7 @@ $ go get github.com/heetch/lapjv/...
 Include Lapjv in your project:
 
 ```go
-import "github.com/heetch/lapjv"
+import "github.com/philistino/lapjv"
 ```
 
 ### Tool
@@ -51,7 +51,7 @@ import (
         "fmt"
         "math/rand"
 
-        "github.com/heetch/lapjv"
+        "github.com/philistino/lapjv"
 )
 
 func main() {

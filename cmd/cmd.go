@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/heetch/lapjv"
+	"github.com/philistino/lapjv"
 	"github.com/spf13/cobra"
 )
 

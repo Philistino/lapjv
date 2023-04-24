@@ -1,7 +1,9 @@
 package lapjv
 
+import "math"
+
 // MaxValue is the maximum cost allowed in the matrix
-const MaxValue = 100000
+const MaxValue = math.MaxInt
 
 // NewResult instantiates an allocated Result
 func NewResult(dim int) *Result {
@@ -14,29 +16,39 @@ func NewResult(dim int) *Result {
 // Result returns by the LAPJV
 type Result struct {
 	// Total cost
-	Cost int
+	Cost float64
 	// Assignments in row
 	InRow []int
 	// Assignments in col
 	InCol []int
 }
 
+type Number interface {
+	int | float64 | float32
+}
+
 // Lapjv is a naive port of the Jonker Volgenant Algorithm from C++ to Go
-func Lapjv(matrix [][]int) *Result {
+func Lapjv[T Number](matrix [][]T) *Result {
 	var unassignedfound bool
-	var i, imin, numfree, prvnumfree, i0, freerow int
+	var i, imin, numfree, prvnumfree, freerow int
 	var j, j1, j2, endofpath, last, low, up int
-	var min, h, umin, usubmin, v2 int
+	var i0 int
+	var usubmin T
+	var v2 T
+	var min T
+	var umin T
+	var h T
 
 	dim := len(matrix)
 	result := NewResult(dim)
-	u := make([]int, dim)
-	v := make([]int, dim)
+	u := make([]T, dim)
+	v := make([]T, dim)
 	free := make([]int, dim)
 	collist := make([]int, dim)
 	matches := make([]int, dim)
 	pred := make([]int, dim)
-	d := make([]int, dim)
+	d := make([]T, dim)
+	Max := T(MaxValue)
 
 	// skipping L53-54
 	for j := dim - 1; j >= 0; j-- {
@@ -65,7 +77,7 @@ func Lapjv(matrix [][]int) *Result {
 			numfree++
 		} else if matches[i] == 1 {
 			j1 = result.InRow[i]
-			min = MaxValue
+			min = Max
 			for j := 0; j < dim; j++ {
 				if j != j1 && matrix[i][j]-v[j] < min {
 					min = matrix[i][j] - v[j]
@@ -84,7 +96,7 @@ func Lapjv(matrix [][]int) *Result {
 			k++
 			umin = matrix[i][0] - v[0]
 			j1 = 0
-			usubmin = MaxValue
+			usubmin = Max
 
 			for j := 1; j < dim; j++ {
 				h = matrix[i][j] - v[j]
@@ -211,13 +223,13 @@ func Lapjv(matrix [][]int) *Result {
 		}
 	}
 
-	lapcost := 0
+	lapcost := T(0)
 	for i := 0; i < dim; i++ {
 		j = result.InRow[i]
 		u[i] = matrix[i][j] - v[j]
 		lapcost += matrix[i][j]
 	}
 
-	result.Cost = lapcost
+	result.Cost = float64(lapcost)
 	return result
 }
